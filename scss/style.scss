@@ -176,7 +176,8 @@ h5,
                 position: absolute;
                 top: 50%;
                 left: 50%;
-                font-size: 24px;
+                //font-size: 24px;
+                font-size: 36px;
                 transform: translate(-50%, -50%);
                 @include transition(.3s);
             }
@@ -190,7 +191,8 @@ h5,
                 position: absolute;
                 top: 50%;
                 left: 50%;
-                font-size: 24px;
+                //font-size: 24px;
+                font-size: 36px;
                 transform: translate(-50%, -50%);
                 @include transition(.3s);
             }
