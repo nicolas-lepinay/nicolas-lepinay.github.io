@@ -10842,7 +10842,7 @@ h5,
   bottom: 0;
   width: 50%;
   opacity: 1;
-  background: #c4aa64;
+  background: radial-gradient(circle, #e4d5a4 0%, #a59363 100%);
   z-index: -1;
 }
 @media (max-width: 767.98px) {
