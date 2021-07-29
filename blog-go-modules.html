@@ -55,8 +55,8 @@
         <div class="container">
             <div class="row no-gutters slider-text align-items-end justify-content-center">
                 <div class="col-md-9 pt-5 text-center">
-                    <p class="breadcrumbs"><span class="me-2"><a href="index.html">Home <i class="fa fa-chevron-right"></i></a></span> <span class="me-2"><a href="blog.html">Blog <i class="fa fa-chevron-right"></i></a></span> <span>Blog Single <i class="fa fa-chevron-right"></i></span></p>
-                    <h1 class="mb-0 bread">Blog Details</h1>
+                    <p class="breadcrumbs"><span class="me-2"><a href="index.html">Accueil <i class="fa fa-chevron-right"></i></a></span> <span class="me-2"><a href="blog.html">Blog <i class="fa fa-chevron-right"></i></a></span> <span>Comment utiliser Go Modules <i class="fa fa-chevron-right"></i></span></p>
+                    <h1 class="mb-0 bread">Guide d'utilisation de Go Modules</h1>
                 </div>
             </div>
         </div>
@@ -66,58 +66,60 @@
         <div class="container">
             <div class="row g-lg-5">
                 <div class="col-lg-8 blog-single">
-                    <h2 class="mb-3">#1. Bootstrap 5</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis, eius mollitia suscipit, quisquam doloremque distinctio perferendis et doloribus unde architecto optio laboriosam porro adipisci sapiente officiis nemo accusamus
-                        ad praesentium? Esse minima nisi et. Dolore perferendis, enim praesentium omnis, iste doloremque quia officia optio deserunt molestiae voluptates soluta architecto tempora.</p>
-                    <p>
-                        <img src="images/bg_1.jpg" alt="" class="img-fluid">
+                    <p>J'ai récemment commencé à utiliser Go Modules, l'outil de gestion des dépendances intégré à Go, et si comme moi vous étiez habitué à govendor ou dep, cela risque de vous changer un peu. D'où la nécessité de cet article aujourd'hui.
                     </p>
-                    <p>Molestiae cupiditate inventore animi, maxime sapiente optio, illo est nemo veritatis repellat sunt doloribus nesciunt! Minima laborum magni reiciendis qui voluptate quisquam voluptatem soluta illo eum ullam incidunt rem assumenda eveniet
-                        eaque sequi deleniti tenetur dolore amet fugit perspiciatis ipsa, odit. Nesciunt dolor minima esse vero ut ea, repudiandae suscipit!</p>
 
-                    <pre><code class="language-css">
-        body {
-            font: 100% Helvetica, sans-serif;
-            color: #333;
-        }
-            
-        .box {
-            -webkit-border-radius: 10px;
-            -moz-border-radius: 10px;
-            -ms-border-radius: 10px;
-            border-radius: 10px;
-        }
+                    <h2 class="mb-3">Placez votre code ailleurs que dans le GOPATH</h2>
+
+                    <p>On peut techniquement utiliser Go Modules à l'intérieur du <code>gopath</code>, mais il faudra alors déclarer <code>GO111MODULES=on</code> dans vos variables d'environement. Cela étant dit, le but premier des modules est de ne pas
+                        avoir à mettre son code dans le <code>gopath</code>, donc évitez de faire ça.</p>
+
+                    <h2 class="mb-3">Initialisez Go Modules</h2>
+
+                    <p>Positionnez vous dans le dossier de votre projet Go et exécutez cette commande dans votre terminal :</p>
+
+                    <pre><code class="language-bash">go mod init <strong>nom-de-votre-module</strong></code></pre>
+
+                    <p><code>nom-de-votre-module</code> peut être n'importe quel nom que vous souhaiteriez donner à votre module. Celui-ci doit être évidemment être unique pour éviter les conflits entre différents modules.</p>
+                    <p>Cela génère un fichier <code>go.mod</code>, auquel il va falloir ajouter les dépendances du projet grâce à la commande <code>go get</code> suivante :</p>
+
+                    <pre><code class="language-bash">go get -u ./...</code></pre>
+
+                    <p>Cela va automatiquement ajouter au fichier <code>go.mod</code> toutes les dépendances/imports actuels de votre projet et générer un fichier <code>go.sum</code> qu'il est inutile de modifier.</p>
+
+                    <h2 class="mb-3 mt-5">Ajoutez les dépendances au vendor</h2>
+                    <p>Exécutez cette commande :</p>
+                    <pre><code class="language-bash">go mod vendor</code></pre>
+                    <p>Cela générera un dossier vendor and ajoutera une copie de chaque dépendance présente dans le fichier <code>go.mod</code> à l'intérieur du dossier.</p>
+
+                    <h2 class="mb-3 mt-5">Mettre à jour une dépendance</h2>
+                    <p>Exécutez cette commande :</p>
+                    <pre><code class="language-bash">
+    go get -u <strong>url-du-repo</strong>
+    go mod vendor
                     </code></pre>
 
-                    <h2 class="mb-3 mt-5">#2. Creative WordPress Themes</h2>
-                    <p>Temporibus ad error suscipit exercitationem hic molestiae totam obcaecati rerum, eius aut, in. Exercitationem atque quidem tempora maiores ex architecto voluptatum aut officia doloremque. Error dolore voluptas, omnis molestias odio
-                        dignissimos culpa ex earum nisi consequatur quos odit quasi repellat qui officiis reiciendis incidunt hic non? Debitis commodi aut, adipisci.</p>
-                    <p>
-                        <img src="images/image_3.jpg" alt="" class="img-fluid">
-                    </p>
-                    <p>Quisquam esse aliquam fuga distinctio, quidem delectus veritatis reiciendis. Nihil explicabo quod, est eos ipsum. Unde aut non tenetur tempore, nisi culpa voluptate maiores officiis quis vel ab consectetur suscipit veritatis nulla
-                        quos quia aspernatur perferendis, libero sint. Error, velit, porro. Deserunt minus, quibusdam iste enim veniam, modi rem maiores.</p>
+                    <p>Cela mettra à jour la version de l'import dans le fichier <code>go.mod</code>, puis le code dans votre dossier vendor.</p>
+
+                    <p>Et voilà pour les bases des Go Modules !</p>
                     <div class="tag-widget post-tag-container mb-5 mt-5">
                         <div class="tagcloud">
-                            <a href="#" class="tag-cloud-link">design</a>
-                            <a href="#" class="tag-cloud-link">CSS3</a>
-                            <a href="#" class="tag-cloud-link">HTML5</a>
-                            <a href="#" class="tag-cloud-link">bootstrap5</a>
+                            <a href="#" class="tag-cloud-link">golang</a>
                         </div>
                     </div>
 
                     <div class="about-author d-flex p-4 bg-light rounded">
                         <div class="bio me-md-4 img" style="background-image: url(images/person_1.jpg);"></div>
                         <div class="desc">
-                            <h3>George Washington</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate
-                                numquam!
+                            <h3>Nicolas Lépinay</h3>
+                            <p>Étudiant en informatique et curieux de tout.
                             </p>
                         </div>
                     </div>
 
+                    <!-- COMMENTAIRES : -->
 
-                    <div class="pt-5 mt-5">
+                    <!-- <div class="pt-5 mt-5">
                         <h3 class="mb-5 head-title">6 Comments</h3>
                         <ul class="comment-list">
                             <li class="comment">
@@ -193,10 +195,13 @@
                                     <p><a href="#" class="reply">Reply</a></p>
                                 </div>
                             </li>
-                        </ul>
-                        <!-- END comment-list -->
+                        </ul> -->
 
-                        <div class="comment-form-wrap pt-5">
+                    <!-- END comment-list -->
+
+                    <!-- FORMULAIRE POUR LAISSER UN COMMENTAIRE : -->
+
+                    <!-- <div class="comment-form-wrap pt-5">
                             <h3 class="mb-5 head-title">Leave a comment</h3>
                             <form action="#" class="p-4 p-lg-5 comment-form">
                                 <div class="row">
@@ -232,12 +237,13 @@
                                 </div>
 
                             </form>
-                        </div>
-                    </div>
+                        </div> 
+                    </div> -->
 
                 </div>
                 <!-- .col-md-8 -->
-                <div class="col-lg-4 sidebar pl-md-4">
+
+                <!-- <div class="col-lg-4 sidebar pl-md-4">
                     <div class="sidebar-box bg-light rounded">
                         <form action="#" class="search-form">
                             <div class="form-group">
@@ -245,8 +251,9 @@
                                 <input type="text" class="form-control" placeholder="Search...">
                             </div>
                         </form>
-                    </div>
-                    <div class="sidebar-box">
+                    </div> -->
+
+                <!-- <div class="sidebar-box">
                         <h3>What I Do?</h3>
                         <div class="d-md-flex">
                             <ul class="categories me-md-4">
@@ -262,45 +269,48 @@
                                 <li><a href="#">IT Consultancy</a></li>
                             </ul>
                         </div>
-                    </div>
+                    </div> -->
 
-                    <div class="sidebar-box">
-                        <h3>Recent Blog</h3>
-                        <div class="block-21 mb-4 d-flex">
-                            <a class="blog-img me-4" style="background-image: url(images/image_1.jpg);"></a>
-                            <div class="text">
-                                <h3 class="heading"><a href="#">Far far away, behind the word mountains</a></h3>
-                                <div class="meta">
-                                    <div><a href="#"><span class="fa fa-calendar"></span> December 24, 2020</a></div>
-                                    <div><a href="#"><span class="fa fa-user"></span> Admin</a></div>
-                                    <div><a href="#"><span class="fa fa-comment"></span> 19</a></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="block-21 mb-4 d-flex">
-                            <a class="blog-img me-4" style="background-image: url(images/image_2.jpg);"></a>
-                            <div class="text">
-                                <h3 class="heading"><a href="#">Far far away, behind the word mountains</a></h3>
-                                <div class="meta">
-                                    <div><a href="#"><span class="fa fa-calendar"></span> December 24, 2020</a></div>
-                                    <div><a href="#"><span class="fa fa-user"></span> Admin</a></div>
-                                    <div><a href="#"><span class="fa fa-comment"></span> 19</a></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="block-21 mb-4 d-flex">
-                            <a class="blog-img me-4" style="background-image: url(images/image_3.jpg);"></a>
-                            <div class="text">
-                                <h3 class="heading"><a href="#">Far far away, behind the word mountains</a></h3>
-                                <div class="meta">
-                                    <div><a href="#"><span class="fa fa-calendar"></span> December 24, 2020</a></div>
-                                    <div><a href="#"><span class="fa fa-user"></span> Admin</a></div>
-                                    <div><a href="#"><span class="fa fa-comment"></span> 19</a></div>
-                                </div>
+                <div class="sidebar-box">
+                    <h3>Articles récents</h3>
+                    <div class="block-21 mb-4 d-flex">
+                        <a class="blog-img me-4" style="background-image: url(images/image_1.jpg);"></a>
+                        <div class="text">
+                            <h3 class="heading"><a href="#">Far far away, behind the word mountains</a></h3>
+                            <div class="meta">
+                                <div><a href="#"><span class="fa fa-calendar"></span> December 24, 2020</a></div>
+                                <div><a href="#"><span class="fa fa-user"></span> Admin</a></div>
+                                <div><a href="#"><span class="fa fa-comment"></span> 19</a></div>
                             </div>
                         </div>
                     </div>
 
+                    <div class="block-21 mb-4 d-flex">
+                        <a class="blog-img me-4" style="background-image: url(images/image_2.jpg);"></a>
+                        <div class="text">
+                            <h3 class="heading"><a href="#">Far far away, behind the word mountains</a></h3>
+                            <div class="meta">
+                                <div><a href="#"><span class="fa fa-calendar"></span> December 24, 2020</a></div>
+                                <div><a href="#"><span class="fa fa-user"></span> Admin</a></div>
+                                <div><a href="#"><span class="fa fa-comment"></span> 19</a></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="block-21 mb-4 d-flex">
+                        <a class="blog-img me-4" style="background-image: url(images/image_3.jpg);"></a>
+                        <div class="text">
+                            <h3 class="heading"><a href="#">Far far away, behind the word mountains</a></h3>
+                            <div class="meta">
+                                <div><a href="#"><span class="fa fa-calendar"></span> December 24, 2020</a></div>
+                                <div><a href="#"><span class="fa fa-user"></span> Admin</a></div>
+                                <div><a href="#"><span class="fa fa-comment"></span> 19</a></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- 
                     <div class="sidebar-box">
                         <h3>Tag Cloud</h3>
                         <div class="tagcloud">
@@ -314,15 +324,16 @@
                             <a href="#" class="tag-cloud-link">HTML</a>
                             <a href="#" class="tag-cloud-link">CSS3</a>
                         </div>
-                    </div>
+                    </div> -->
 
-                    <div class="sidebar-box">
+                <!-- <div class="sidebar-box">
                         <h3>Paragraph</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!</p>
-                    </div>
-                </div>
+                    </div> -->
 
             </div>
+
+        </div>
         </div>
     </section>
     <!-- .section -->

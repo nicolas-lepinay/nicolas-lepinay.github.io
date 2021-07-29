@@ -55,8 +55,8 @@
         <div class="container">
             <div class="row no-gutters slider-text align-items-end justify-content-center">
                 <div class="col-md-9 pt-5 text-center">
-                    <p class="breadcrumbs"><span class="me-2"><a href="index.html">Home <i class="fa fa-chevron-right"></i></a></span> <span class="me-2"><a href="blog.html">Blog <i class="fa fa-chevron-right"></i></a></span> <span>Blog Single <i class="fa fa-chevron-right"></i></span></p>
-                    <h1 class="mb-0 bread">Blog Details</h1>
+                    <p class="breadcrumbs"><span class="me-2"><a href="index.html">Accueil <i class="fa fa-chevron-right"></i></a></span> <span class="me-2"><a href="blog.html">Blog <i class="fa fa-chevron-right"></i></a></span> <span>Les fondamentaux du CSS <i class="fa fa-chevron-right"></i></span></p>
+                    <h1 class="mb-0 bread">Les choses à savoir avant de débuter en CSS</h1>
                 </div>
             </div>
         </div>
@@ -66,58 +66,127 @@
         <div class="container">
             <div class="row g-lg-5">
                 <div class="col-lg-8 blog-single">
-                    <h2 class="mb-3">#1. Bootstrap 5</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis, eius mollitia suscipit, quisquam doloremque distinctio perferendis et doloribus unde architecto optio laboriosam porro adipisci sapiente officiis nemo accusamus
-                        ad praesentium? Esse minima nisi et. Dolore perferendis, enim praesentium omnis, iste doloremque quia officia optio deserunt molestiae voluptates soluta architecto tempora.</p>
-                    <p>
-                        <img src="images/bg_1.jpg" alt="" class="img-fluid">
+                    <p>Ce n'est un secret pour personne, le CSS semble être à la limite de l'ésotérisme lorsqu'on débute. On bricole les imperfections comme on peut avant de s'apercevoir que cela n'a fait que tout casser à un autre endroit. C'est très frustrant,
+                        et c'est ce que j'ai ressenti pendant longtemps avant que les concepts de base finissent à prendre forme dans ma tête.
                     </p>
-                    <p>Molestiae cupiditate inventore animi, maxime sapiente optio, illo est nemo veritatis repellat sunt doloribus nesciunt! Minima laborum magni reiciendis qui voluptate quisquam voluptatem soluta illo eum ullam incidunt rem assumenda eveniet
-                        eaque sequi deleniti tenetur dolore amet fugit perspiciatis ipsa, odit. Nesciunt dolor minima esse vero ut ea, repudiandae suscipit!</p>
+
+                    <p>En y repensant aujourd'hui, j'ai mis le doigt sur quelques concepts clé qui m'apparaissent désormais indispensables pour bien débuter. A savoir :</p>
+
+                    <p>• le modèle en "boîte" (<code>box-sizing</code>, <code>height</code>, <code>width</code>, <code>margin</code>, <code>padding</code>)</p>
+                    <p>• la disposition (<code>display</code>)</p>
+                    <p>• flux du document et positionnement (<code>position</code>, <code>top</code>, <code>left</code>, etc.)</p>
+
+                    <h2 class="mb-3">Tout est un rectangle</h2>
+
+                    <p>L'un des concepts clé, selon moi, lorsqu'il s'agit d'éléments web, est que tout élément peut être décomposé en multiples rectangles concentriques. Décomposez mentallement les composantes de votre page en une succession d'éléments rectangulaires.
+                        Cela vous facilitera la vie.</p>
+
+                    <h2 class="mb-3">Le modèle en boîte</h2>
+
+                    <p><img src="images/box-model.png" alt="" class="img-fluid"></p>
+
+                    <p>La taille d'un élément HTML, c'est-à-dire sa <code>height</code> (hauteur) et sa <code>width</code> (largeur), peut être définie selon deux différents systèmes de mesure, auxquels on peut accéder grâce à la propriété <code>box-sizing</code>                        :</p>
+
+                    <pre><code class="language-css">box-sizing: content-box;</code></pre>
+                    <p><code>content-box</code> est la valeur par défaut. Avec cette propriété-là, la taille d'un élément ne comprend que son contenu, et n'englobe ni son <code>padding</code> ni sa <code>border</code>. Quand on définit <code>width: 100%</code>                        avec la valeur <code>content-box</code>, le contenu de l'élément aura 100% de la largeur de l'élément parent, mais toute bordure ou padding supplémentaire rendra l'élément encore plus large.
+                    </p>
+
+                    <pre><code class="language-css">box-sizing: border-box;</code></pre>
+
+                    <p>Avec la valeur <code>border-box</code>, la taille d'un élément comprend également son <code>padding</code> et sa <code>border</code>. Pour appliquer l'option <code>border-box</code> à tous les éléments d'un page web, ajoutez une ligne
+                        de code comme celle-ci à votre fichier CSS : </p>
 
                     <pre><code class="language-css">
-        body {
-            font: 100% Helvetica, sans-serif;
-            color: #333;
-        }
-            
-        .box {
-            -webkit-border-radius: 10px;
-            -moz-border-radius: 10px;
-            -ms-border-radius: 10px;
-            border-radius: 10px;
-        }
+    *, ::before, ::after {
+        box-sizing: border-box;
+    }
                     </code></pre>
 
-                    <h2 class="mb-3 mt-5">#2. Creative WordPress Themes</h2>
-                    <p>Temporibus ad error suscipit exercitationem hic molestiae totam obcaecati rerum, eius aut, in. Exercitationem atque quidem tempora maiores ex architecto voluptatum aut officia doloremque. Error dolore voluptas, omnis molestias odio
-                        dignissimos culpa ex earum nisi consequatur quos odit quasi repellat qui officiis reiciendis incidunt hic non? Debitis commodi aut, adipisci.</p>
+                    <h2 class="mb-3">Le layout</h2>
+
+                    <p>Les éléments sont habituellement disposés sur la page dans l'ordre dans lequel ils apparaissent dans le fichier HTML, mais la propriété <code>display</code> permet d'ajuster cet ordre.</p>
+
+                    <pre><code class="language-css">display: inline;</code></pre>
+
+                    <p>Avec cette valeur, les différents éléments successifs sont disposés les uns à la suite des autres sur une même ligne, jusqu'à ce qu'il n'y ait plus de place sur la ligne et qu'ils passent à la ligne d'en dessous. Au final, tous les
+                        éléments s'emboîtent les uns à la suite des autres comme des pièces de Tetris.</p>
+
+                    <pre><code class="language-css">display: block;</code></pre>
+
+                    <p>Ici, chaque élément se comporte comme un rectangle dont la hauteur augmente jusqu'à remplissement par son contenu (la largeur, elle, est égale à 100% du contenu parent par défaut).</p>
+
+                    <pre><code class="language-css">display: inline-block;</code></pre>
+
+                    <p>Cette valeur est à mi-chemin entre les deux précédentes. Le contenu de l'élément sera contenu dans un rectangle, mais l'arrangement de ce rectangle pourra être ajusté.</p>
+
+                    <pre><code class="language-css">display: flex;</code></pre>
+                    <pre><code class="language-css">display: grid;</code></pre>
+
                     <p>
-                        <img src="images/image_3.jpg" alt="" class="img-fluid">
+                        Les valeurs <code>flex</code> et <code>grid</code> désignent des algorithmes de layout plus avancés qui arrangent automatiquement les éléments enfants selon certaines règles (grille, remplissage de la largeur de l'écran, etc.)
+                        Ce sont les deux valeurs les plus usitées et les plus utiles pour construire de bonnes interfaces flexibles et responsives, et je ne saurais trop conseiller de vous renseigner en plus amples détails sur ces deux valeurs. </p>
+
+                    <p>Leur apprentissage a été rendu plus ludique au travers de mini-jeux comme <a href="https://flexboxfroggy.com/#fr" target="_blank">Flexbox Froggy</a> ou <a href="https://cssgridgarden.com/#fr" target="_blank">Grid Garden</a>.</p>
+
+                    <h2 class="mb-3">Le flux du document et le positionnement</h2>
+
+                    <p>La proriété <code>position</code> ajuste le positionnement des éléments par rapport au flux du document, conformément aux propriétés de positionnement comme <code>top, left, right, bottom, inset</code>, etc. </p>
+
+                    <pre><code class="language-css">position: static;</code></pre>
+
+                    <p>
+                        Les éléments sont en position <code>static</code> par défaut. L'élément est disposé normalement et les propriétés de positionnement n'ont aucun effet sur lui. Les éléments statiques n'ont pas de <a href="https://developer.mozilla.org/fr/docs/Web/CSS/CSS_Positioning/Understanding_z_index/The_stacking_context"
+                            target="_blank">contexte d'empilement</a> propre non plus. La propriété <code>z-index</code> est donc inutilisable également.
                     </p>
-                    <p>Quisquam esse aliquam fuga distinctio, quidem delectus veritatis reiciendis. Nihil explicabo quod, est eos ipsum. Unde aut non tenetur tempore, nisi culpa voluptate maiores officiis quis vel ab consectetur suscipit veritatis nulla
-                        quos quia aspernatur perferendis, libero sint. Error, velit, porro. Deserunt minus, quibusdam iste enim veniam, modi rem maiores.</p>
+
+                    <pre><code class="language-css">position: relative;</code></pre>
+
+                    <p>
+                        Les propriétés de positionnement comme <code>top</code>, <code>left</code>, etc. génère un décalage qui décale l'élément par rapport à sa position initiale. Les éléments non-enfants, en revanche, se comporteront comme si l'élément
+                        était toujours dans sa position initiale. La position <code>relative</code> est particulièrement utile pour disposer des éléments enfants dont la position sera <code>absolute</code>. Ces éléments enfants pourront ainsi être disposés
+                        <i>relativement</i> à leur premier élément parent dont la position est <code>relative</code>.
+                    </p>
+
+                    <pre><code class="language-css">position: absolute;</code></pre>
+
+                    <p>Cette valeur retire l'élément du flux du document et ses parents (dont la position n'est pas <code>relative</code>) seront disposés comme si cet élément n'était pas présent. Les propriétés de positionnement génère un décalage qui décale
+                        l'élément par rapport à sa position initiale relativement à son premier parent non-statique. Vous pouvez utiliser la <code>position: relative</code> sur un élément parent pour l'utiliser comme point d'ancrage pour un élément enfant
+                        dont la position est <code>absolute</code>.
+                    </p>
+
+                    <pre><code class="language-css">position: fixed;</code></pre>
+
+                    <p>L'élément est retiré du flux normal du document et est disposé relativement à l'écran. Si des propriété de positionnement sont spécifiés, l'élément sera toujours disposé avec le même décalage par rapport à l'écran. En d'autres termes,
+                        l'élément apparaîtra fixé sur place et ne bougera jamais, même lorqu'on scroll.</p>
+
+                    <h2 class="mb-3">Conclusion</h2>
+                    <p>En conclusion, ce sont les principales propriétés que j'aurais aimé comprendre dès le début. J'ai passé beaucoup de temps à tâtonner, à bricoler mon CSS par-ci par-là, sans vraiment comprendre pourquoi les choses ne fonctionnaient
+                        pas comme je l'attendais. Les choses ont heureusement fini par s'emboîter et j'ai pu finir par comprendre et surtout gagner du temps. </p>
+
+
+
+
+
+
+
                     <div class="tag-widget post-tag-container mb-5 mt-5">
                         <div class="tagcloud">
-                            <a href="#" class="tag-cloud-link">design</a>
-                            <a href="#" class="tag-cloud-link">CSS3</a>
-                            <a href="#" class="tag-cloud-link">HTML5</a>
-                            <a href="#" class="tag-cloud-link">bootstrap5</a>
+                            <a href="#" class="tag-cloud-link">css</a>
                         </div>
                     </div>
 
                     <div class="about-author d-flex p-4 bg-light rounded">
                         <div class="bio me-md-4 img" style="background-image: url(images/person_1.jpg);"></div>
                         <div class="desc">
-                            <h3>George Washington</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate
-                                numquam!
+                            <h3>Nicolas Lépinay</h3>
+                            <p>Étudiant en informatique et curieux de tout.
                             </p>
                         </div>
                     </div>
 
+                    <!-- COMMENTAIRES : -->
 
-                    <div class="pt-5 mt-5">
+                    <!-- <div class="pt-5 mt-5">
                         <h3 class="mb-5 head-title">6 Comments</h3>
                         <ul class="comment-list">
                             <li class="comment">
@@ -193,10 +262,13 @@
                                     <p><a href="#" class="reply">Reply</a></p>
                                 </div>
                             </li>
-                        </ul>
-                        <!-- END comment-list -->
+                        </ul> -->
 
-                        <div class="comment-form-wrap pt-5">
+                    <!-- END comment-list -->
+
+                    <!-- FORMULAIRE POUR LAISSER UN COMMENTAIRE : -->
+
+                    <!-- <div class="comment-form-wrap pt-5">
                             <h3 class="mb-5 head-title">Leave a comment</h3>
                             <form action="#" class="p-4 p-lg-5 comment-form">
                                 <div class="row">
@@ -232,12 +304,13 @@
                                 </div>
 
                             </form>
-                        </div>
-                    </div>
+                        </div> 
+                    </div> -->
 
                 </div>
                 <!-- .col-md-8 -->
-                <div class="col-lg-4 sidebar pl-md-4">
+
+                <!-- <div class="col-lg-4 sidebar pl-md-4">
                     <div class="sidebar-box bg-light rounded">
                         <form action="#" class="search-form">
                             <div class="form-group">
@@ -245,8 +318,9 @@
                                 <input type="text" class="form-control" placeholder="Search...">
                             </div>
                         </form>
-                    </div>
-                    <div class="sidebar-box">
+                    </div> -->
+
+                <!-- <div class="sidebar-box">
                         <h3>What I Do?</h3>
                         <div class="d-md-flex">
                             <ul class="categories me-md-4">
@@ -262,45 +336,48 @@
                                 <li><a href="#">IT Consultancy</a></li>
                             </ul>
                         </div>
-                    </div>
+                    </div> -->
 
-                    <div class="sidebar-box">
-                        <h3>Recent Blog</h3>
-                        <div class="block-21 mb-4 d-flex">
-                            <a class="blog-img me-4" style="background-image: url(images/image_1.jpg);"></a>
-                            <div class="text">
-                                <h3 class="heading"><a href="#">Far far away, behind the word mountains</a></h3>
-                                <div class="meta">
-                                    <div><a href="#"><span class="fa fa-calendar"></span> December 24, 2020</a></div>
-                                    <div><a href="#"><span class="fa fa-user"></span> Admin</a></div>
-                                    <div><a href="#"><span class="fa fa-comment"></span> 19</a></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="block-21 mb-4 d-flex">
-                            <a class="blog-img me-4" style="background-image: url(images/image_2.jpg);"></a>
-                            <div class="text">
-                                <h3 class="heading"><a href="#">Far far away, behind the word mountains</a></h3>
-                                <div class="meta">
-                                    <div><a href="#"><span class="fa fa-calendar"></span> December 24, 2020</a></div>
-                                    <div><a href="#"><span class="fa fa-user"></span> Admin</a></div>
-                                    <div><a href="#"><span class="fa fa-comment"></span> 19</a></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="block-21 mb-4 d-flex">
-                            <a class="blog-img me-4" style="background-image: url(images/image_3.jpg);"></a>
-                            <div class="text">
-                                <h3 class="heading"><a href="#">Far far away, behind the word mountains</a></h3>
-                                <div class="meta">
-                                    <div><a href="#"><span class="fa fa-calendar"></span> December 24, 2020</a></div>
-                                    <div><a href="#"><span class="fa fa-user"></span> Admin</a></div>
-                                    <div><a href="#"><span class="fa fa-comment"></span> 19</a></div>
-                                </div>
+                <div class="sidebar-box">
+                    <h3>Articles récents</h3>
+                    <div class="block-21 mb-4 d-flex">
+                        <a class="blog-img me-4" style="background-image: url(images/image_1.jpg);"></a>
+                        <div class="text">
+                            <h3 class="heading"><a href="#">Far far away, behind the word mountains</a></h3>
+                            <div class="meta">
+                                <div><a href="#"><span class="fa fa-calendar"></span> December 24, 2020</a></div>
+                                <div><a href="#"><span class="fa fa-user"></span> Admin</a></div>
+                                <div><a href="#"><span class="fa fa-comment"></span> 19</a></div>
                             </div>
                         </div>
                     </div>
 
+                    <div class="block-21 mb-4 d-flex">
+                        <a class="blog-img me-4" style="background-image: url(images/image_2.jpg);"></a>
+                        <div class="text">
+                            <h3 class="heading"><a href="#">Far far away, behind the word mountains</a></h3>
+                            <div class="meta">
+                                <div><a href="#"><span class="fa fa-calendar"></span> December 24, 2020</a></div>
+                                <div><a href="#"><span class="fa fa-user"></span> Admin</a></div>
+                                <div><a href="#"><span class="fa fa-comment"></span> 19</a></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="block-21 mb-4 d-flex">
+                        <a class="blog-img me-4" style="background-image: url(images/image_3.jpg);"></a>
+                        <div class="text">
+                            <h3 class="heading"><a href="#">Far far away, behind the word mountains</a></h3>
+                            <div class="meta">
+                                <div><a href="#"><span class="fa fa-calendar"></span> December 24, 2020</a></div>
+                                <div><a href="#"><span class="fa fa-user"></span> Admin</a></div>
+                                <div><a href="#"><span class="fa fa-comment"></span> 19</a></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- 
                     <div class="sidebar-box">
                         <h3>Tag Cloud</h3>
                         <div class="tagcloud">
@@ -314,15 +391,16 @@
                             <a href="#" class="tag-cloud-link">HTML</a>
                             <a href="#" class="tag-cloud-link">CSS3</a>
                         </div>
-                    </div>
+                    </div> -->
 
-                    <div class="sidebar-box">
+                <!-- <div class="sidebar-box">
                         <h3>Paragraph</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!</p>
-                    </div>
-                </div>
+                    </div> -->
 
             </div>
+
+        </div>
         </div>
     </section>
     <!-- .section -->
