@@ -10875,20 +10875,27 @@ h5,
 .hero-wrap .slider-text .desc {
   width: 100%;
 }
+
+.hero-wrap .slider-text .subheading {
+  color: #c4aa64;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
 @media (max-width: 991.98px) {
   .hero-wrap .slider-text .desc {
     text-align: center;
   }
+  .hero-wrap .slider-text .subheading {
+    color: #222222;
+  }
 }
-.hero-wrap .slider-text .subheading {
-  text-transform: uppercase;
-  font-weight: 700;
-  color: #c4aa64;
-  font-size: 16px;
-  letter-spacing: 1px;
-}
+
 @media (max-width: 575.98px) {
   .hero-wrap .slider-text .subheading {
+    color: #c4aa64;
     font-size: 12px;
     font-weight: 500;
   }
@@ -10912,7 +10919,8 @@ h5,
   }
 }
 @media (max-width: 1199.98px) {
-  .hero-wrap .slider-text .carousel-about {
+  .hero-wrap .slider-text .carousel-about,
+  .hero-wrap .slider-text .no-carousel-about {
     position: absolute;
     left: 0;
     right: 0;
