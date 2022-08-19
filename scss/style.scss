@@ -10,14 +10,38 @@ $black: #000000;
 $darken: #222222;
 $light: #f8f8f8;
 //$primary: #d5c455;
-$primary: rgb(196, 170, 100);
+//$primary: rgb(196, 170, 100);// Gold
+//$primary: #615dfa; // Viking purple
+$primary: #6b63b5; // Pottermore purple
 $secondary: #fd5c64;
+
+$gradient: linear-gradient(108deg, #b16cea 8%, #ff5e69 40%, #ff8a56 77%, #ffa84b 91%);
+$webkit-gradient: -webkit-linear-gradient(108deg, #b16cea 8%, #ff5e69 40%, #ff8a56 77%, #ffa84b 91%);
+$moz-gradient: -moz-linear-gradient(108deg, #b16cea 8%, #ff5e69 40%, #ff8a56 77%, #ffa84b 91%);
+$ms-gradient: -ms-linear-gradient(108deg, #b16cea 8%, #ff5e69 40%, #ff8a56 77%, #ffa84b 91%);
+$o-gradient: -o-linear-gradient(108deg, #b16cea 8%, #ff5e69 40%, #ff8a56 77%, #ffa84b 91%);
+
 @mixin transition($transition) {
     -moz-transition: all $transition ease;
     -o-transition: all $transition ease;
     -webkit-transition: all $transition ease;
     -ms-transition: all $transition ease;
     transition: all $transition ease;
+}
+
+// CUSTOM CLASS
+.gradient-text{
+    background-image: $webkit-gradient;
+    background-image: $moz-gradient;
+    background-image: $ms-gradient;
+    background-image: $o-gradient;
+    background-image: $gradient;
+    color: transparent;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -ms-background-clip: text;
+    -o-background-clip: text;
+    background-clip: text;
 }
 
 html {}
@@ -57,6 +81,12 @@ h5,
     line-height: 1.5;
     color: rgba(0, 0, 0, .8);
     font-weight: 400;
+}
+
+h1 > .highlight {
+    @include media-breakpoint-only(md) {
+        color: white;
+    }
 }
 
 .text-primary {
@@ -124,7 +154,8 @@ h5,
                     color: $white;
                 }
                 &.active {
-                    color: $primary !important;
+                    //color: $primary !important;
+                    @extend .gradient-text;
                 }
             }
             @include media-breakpoint-down(md) {
@@ -157,6 +188,9 @@ h5,
         width: 30px;
         height: 30px;
         position: relative;
+        &.white {
+            color: $white !important;
+        }
         @include media-breakpoint-down(lg) {
             color: $white !important;
         }
@@ -238,7 +272,8 @@ h5,
         width: 50%;
         opacity: 1;
         //background: $primary;
-        background: radial-gradient(circle, rgb(228, 213, 164) 0%, rgb(165, 147, 99) 100%);
+        //background: radial-gradient(circle, rgb(228, 213, 164) 0%, rgb(165, 147, 99) 100%);
+        background: $darken;
         z-index: -1;
         @include media-breakpoint-down(md) {
             opacity: 0;
@@ -272,9 +307,10 @@ h5,
             }
         }
         .subheading {
+            @extend .gradient-text;
             text-transform: uppercase;
             font-weight: 700;
-            color: $primary;
+            //color: $primary;
             font-size: 16px;
             letter-spacing: 1px;
             @include media-breakpoint-down(sm) {
@@ -399,8 +435,10 @@ h5,
         font-size: 16px;
     }
     &.btn-primary {
-        background: $primary !important;
-        border: 1px solid $primary !important;
+        //background: $primary !important;
+        background: lighten($darken, 10%) !important;
+        //border: 1px solid $primary !important;
+        border: none !important;
         color: $white !important;
         span {
             color: $white !important;
@@ -423,7 +461,8 @@ h5,
     }
     &.btn-white {
         background: $white !important;
-        border: 1px solid $white !important;
+        //border: 1px solid $white !important;
+        border: none !important;
         color: $black !important;
         &:hover {
             border: 1px solid $white;
@@ -639,9 +678,10 @@ textarea.form-control {
     .icon {
         margin-bottom: 8px;
         span {
+            @extend .gradient-text;
             font-size: 70px;
             line-height: 1.2;
-            color: $primary;
+            //color: $primary;
         }
     }
     .text {
@@ -653,10 +693,12 @@ textarea.form-control {
         }
     }
     &:hover {
-        background: $primary;
+        //background: $primary;
+        background: lighten($darken, 10%);
         -webkit-box-shadow: 0px 5px 25px -2px rgba(0, 0, 0, 0.18);
         -moz-box-shadow: 0px 5px 25px -2px rgba(0, 0, 0, 0.18);
         box-shadow: 0px 5px 25px -2px rgba(0, 0, 0, 0.18);
+        @include transition(.3s);
         .icon {
             span {
                 color: $white;
@@ -798,6 +840,8 @@ textarea.form-control {
 }
 
 .ftco-footer {
+    margin-top: 8rem;
+    opacity: 0.5;
     padding: 2em 0;
     .copyright {
         font-size: 13px;
@@ -869,10 +913,11 @@ textarea.form-control {
 
 .heading-section {
     .subheading {
+        @extend .gradient-text;
         font-size: 13px;
         display: block;
         margin-bottom: 5px;
-        color: $primary;
+        //color: $primary;
         text-transform: uppercase;
         font-weight: 700;
         letter-spacing: 2px;
@@ -890,7 +935,8 @@ textarea.form-control {
     }
     &.heading-section-white {
         .subheading {
-            color: $primary;
+            @extend .gradient-text;
+            //color: $primary;
         }
         h2 {
             color: $white;
@@ -970,7 +1016,8 @@ textarea.form-control {
         width: 30px;
         height: 30px;
         border-radius: 50%;
-        background: $primary;
+        //background: $primary;
+        background: $darken;
         span {
             color: $white;
         }
@@ -985,15 +1032,16 @@ textarea.form-control {
         @include border-radius(50%);
     }
     .name {
+        @extend .gradient-text;
         font-weight: 700;
         font-size: 22px;
         margin-bottom: 0;
-        color: $darken;
+        //color: $darken;
     }
     .position {
         font-size: 13px;
         text-transform: uppercase;
-        color: $primary;
+        color: $darken;
         font-weight: 600;
     }
 }
@@ -1025,7 +1073,8 @@ textarea.form-control {
                 font-size: 14px;
                 width: calc(100% - 110px);
                 font-weight: 600;
-                color: $primary;
+                //color: $primary;
+                color: $darken;
                 &:first-child {
                     font-weight: 600;
                     color: $black;
@@ -1086,9 +1135,10 @@ textarea.form-control {
         }
     }
     .number {
+        @extend .gradient-text;
         font-size: 40px;
         font-weight: 700;
-        color: $primary;
+        //color: $primary;
         line-height: 1;
         display: inline-block;
         margin-bottom: 5px;
@@ -1121,7 +1171,8 @@ textarea.form-control {
 }
 
 .progress-bar {
-    background: $primary;
+    //background: $primary;
+    background: lighten($darken, 20%);
     box-shadow: none;
     font-size: 12px;
     line-height: 1.2;
@@ -1161,7 +1212,8 @@ textarea.form-control {
         width: 60px;
         height: 60px;
         border-radius: 50%;
-        background: $primary;
+        //background: $primary;
+        background: lighten($darken, 10%);
         position: relative;
         margin-top: -60px;
         margin-bottom: 20px;
@@ -1177,9 +1229,10 @@ textarea.form-control {
     span.date {
         font-weight: 12px;
         font-weight: 500;
-        color: $primary;
+        color: $darken;
     }
     h2 {
+        @extend .gradient-text;
         font-weight: 500;
         font-size: 24px;
     }
@@ -1188,7 +1241,8 @@ textarea.form-control {
         font-weight: 500;
         color: darken($white, 30%);
         i {
-            color: $primary;
+            @extend .gradient-text;
+            //color: $darken;
         }
     }
 }
@@ -1236,7 +1290,8 @@ textarea.form-control {
         bottom: 0;
         content: '';
         opacity: 0;
-        background: $primary;
+        //background: $primary;
+        background: $darken;
         z-index: -1;
         @include transition(.3s);
         @include media-breakpoint-down(sm) {
@@ -1271,7 +1326,8 @@ textarea.form-control {
     &:hover,
     &:focus {
         .overlay {
-            opacity: .9;
+            //opacity: 0.9;
+            opacity: 1;
         }
         .text {
             opacity: 1;
@@ -1319,13 +1375,16 @@ textarea.form-control {
             margin-bottom: 0;
             font-weight: 400;
             a {
-                color: $black;
+                color: lighten($darken, 10%);
                 &:hover,
                 &:focus,
                 &:active {
-                    color: $primary;
+                    color: black;   
                 }
             }
+        }
+        .theme {
+            @extend .gradient-text;
         }
     }
     .meta {
@@ -1401,13 +1460,14 @@ textarea.form-control {
         }
         p {
             a {
-                color: rgba(0, 0, 0, 1);
+                color: $darken;
                 text-transform: uppercase;
                 font-size: 13px;
                 font-weight: 600;
                 margin-right: 10px;
                 &:hover {
-                    color: $black;
+                    @extend .gradient-text;
+                    //color: $black;
                 }
             }
         }
@@ -1438,8 +1498,9 @@ textarea.form-control {
     p {
         margin-bottom: 0;
         span {
+            @extend .gradient-text;
             font-weight: 400;
-            color: $black;
+            //color: $black;
             display: block;
             text-transform: uppercase;
             font-size: 13px;
