@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>N.L | Cloner un objet en JavaScript en 2022</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/4.5.6/css/ionicons.min.css">
+    <!-- Embedded snippets of code : -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/themes/prism.min.css" />
+
+    <link rel="stylesheet" href="css/prism-new-moon.css" />
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="css/tiny-slider.css">
+    <link rel="stylesheet" href="css/glightbox.min.css">
+    <link rel="stylesheet" href="css/aos.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+
+    <nav class="navbar ftco-navbar-light">
+        <!-- navbar-expand-lg  -->
+        <div class="container-xl">
+            <a class="navbar-brand align-items-center" href="index.html">
+                <span class="">NL.</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class=""></span> 
+        </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">Bio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="experience.html">Parcours</a></li>
+                    <li class="nav-item"><a class="nav-link" href="work.html">Portfolio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+                <!-- <p class="mb-0"><a href="#" class="btn btn-primary rounded">Submit A Property</a></p> -->
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero-wrap hero-wrap-2">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row no-gutters slider-text align-items-end justify-content-center">
+                <div class="col-md-9 pt-5 text-center">
+                    <p class="breadcrumbs"><span class="me-2"><a href="index.html">Accueil <i class="fa fa-chevron-right"></i></a></span> <span class="me-2"><a href="blog.html">Blog <i class="fa fa-chevron-right"></i></a></span> <span>Cloner un objet en JavaScript en 2022<i class="fa fa-chevron-right"></i></span></p>
+                    <h1 class="mb-0 bread">Le deep-copying en JavaScript avec structuredClone()</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="ftco-section">
+        <div class="container">
+            <div class="row g-lg-5">
+                <div class="col-lg-8 blog-single">
+                    <p>
+                        <img src="images/js-cloning.webp" alt="" class="img-fluid">
+                    </p>
+
+                    <p>Pour réaliser un <i>deep clone</i> d'un objet en Node.js, plus besoin de bibliothèque externe ou de passer par la méthode JSON.parse. Vous pouvez désormais utiliser la nouvelle fonction globale <code>structuredClone()</code>. Explications 👇</p>
+
+                    <h2 class="mb-3">Shallow copy</h2>
+
+                    <p>La copie d'un objet en JavaScript est presque toujours <i>shallow</i> (c'est-à-dire une copie par référence : l'objet source et la copie référencent tous deux le même objet), par opposition à <i>deep</i> (c'est-à-dire un clone réel et indépendant). Les modifications effectuées aux propriétés imbriquées de l'objet se répercuteront dans l'objet original <i>et</i> dans la copie de l'objet.</p>
+                                        
+                    <h3 class="mb-3">Avec l'opérateur de propagation : <code>...</code></h3>
+                    
+                    <p>Une <i>shallow copy</i> peut être créée avec l'opérateur de propagation «<code>...</code>» : </p>
+
+<pre class="language-js">
+    <code class="language-js">
+const myOriginal = {
+    aubergine: '🍆',
+    apple: '🍏',
+    recipes: {
+        pie: '🥧',
+        hamburger: '🍔'
+    }
+};
+const myShallowCopy = {...myOriginal};
+    </code>
+</pre>
+
+                    <p>Ajouter ou modifier une propriété <i>directe</i> dans la copie n'affectera <strong>pas</strong> l'original...</p>
+
+<pre class="language-js">
+    <code class="language-js">
+myShallowCopy.mushroom = '🍄';
+console.log(myShallowCopy.mushroom) // '🍄'
+console.log(myOriginal.mushroom) // undefined
+    </code>
+</pre>
+
+                    <p>En revanche, ajouter ou modifier une propriété imbriquée (<i>deeply nested</i>) affectera <i>et</i> l'objet d'origine <i>et</i> la copie de l'objet :</p>
+
+<pre class="language-js">
+    <code class="language-js">
+myShallowCopy.recipes.sushi = '🍣';
+console.log(myShallowCopy.recipes.sushi) // '🍣'
+console.log(myOriginal.recipes.sushi) // '🍣'
+    </code>
+</pre>
+
+
+                    <p>
+                    L'expression <code>{...myOriginal}</code> itère sur les différentes propriétés de l'objet <code>myOriginal</code> grâce à l'opérateur de propagation. Il récupère le nom et la valeur des propriétés et les assigne une par une à un nouvel objet vide. Le nouvel objet qui en résulte est donc identique sur la forme, mais avec sa propre copie de la liste des propriétés et de leurs valeurs. Les valeurs sont également copiées, mais les valeurs dites <i>primitives</i> sont gérées différemment par JavaScript des valeurs non-primitives.
+                    </p>
+
+                    <p>
+                    Selon MDN : « Une primitive (valeur primitive ou structure de donnée primitive) est une donnée qui <strong>n'est pas un objet</strong> et n'a pas de méthode. En JavaScript, il y a 6 types de données primitives: String, Number, Boolean, Null, undefined, Symbol.»
+                    </p>
+
+                    <p>Les valeurs non-primitives (comme les objets imbriqués) sont gérées par référence.</p>
+
+                    <h3 class="mb-3">Avec la méthode <code>Object.assign()</code></h3>
+
+                    <p>Une autre façon de créer une shallow copy est d'utiliser la méthode <code>Object.assign()</code> :</p>
+
+<pre class="language-js">
+    <code class="language-js">
+const myOriginal = {
+    aubergine: '🍆',
+    apple: '🍏'
+};
+const myShallowCopy = Object.assign({}, myOriginal);
+    </code>
+</pre>
+
+                    <h2 class="mb-3">Deep copy</h2>
+
+                    <p>
+                    L'opposé d'une <i>shallow copy</i> est une <strong>deep copy</strong>. Un algorithme de clone réel (deep copy) copie également les propriétés d'un objet une à une, mais s'invoque de manière récursive quand il rencontre une référence à un autre objet imbriqué, créant ainsi un clone de cet objet-là également.
+                    </p>
+
+                    <p>
+                    Pendant longtemps, il n'y a pas eu de méthode évidente pour créer un clone réel d'un objet en JavaScript. La plupart des développeurs avaient recours à des bibliothèques tierces comme Lodash et sa fonction <code>cloneDeep()</code>. L'une des méthodes les plus usitées consistait à utiliser du JSON :
+                    </p>
+
+<pre class="language-js">
+    <code class="language-js">
+const myDeepCopy = JSON.parse(JSON.stringify(myOriginal)); // 😭💀
+    </code>
+</pre>
+
+                    <p>Aujourd'hui, les choses ont enfin changé ! Les développeurs ont désormais accès à la fonction <code>structuredClone()</code> :</p>
+
+<pre class="language-js">
+    <code class="language-js">
+const myDeepCopy = structuredClone(myOriginal); // 👍
+    </code>
+</pre>
+
+                    <p>Hooray ! 🎉 Malheureusement, cette fonction contient tout de même quelques limitations. Si l'objet à copier contient des fonctions, par exemple, elles seront simplement ignorées.</p>
+
+
+
+                    <div class="tag-widget post-tag-container mb-5 mt-5">
+                        <div class="tagcloud">
+                            <a href="#" class="tag-cloud-link">javascript</a>
+                        </div>
+                    </div>
+
+                    <div class="about-author d-flex p-4 bg-light rounded">
+                        <div class="bio me-md-4 img" style="background-image: url(images/nicolas.jpg);"></div>
+                        <div class="desc">
+                            <h3>Nicolas Lépinay</h3>
+                            <p>Étudiant en informatique, féru d'UI/UX design et curieux de tout.
+                            </p>
+                        </div>
+                    </div>
+
+                <div class="sidebar-box">
+                    <h3>Articles récents</h3>
+                    <div class="block-21 mb-4 d-flex">
+                        <a class="blog-img me-4" style="background-image: url(images/rem-em-px.webp);"></a>
+                        <div class="text">
+                            <h3 class="heading"><a href="blog-rem-em-px.html">CSS : rem, em ou pixels ?</a></h3>
+                            <div class="meta">
+                                <div><a href="#"><span class="fa fa-calendar"></span> 9 août 2021</a></div>
+                                <div><a href="#"><span class="fa fa-user"></span> Nicolas Lépinay</a></div>
+                                <!-- <div><a href="#"><span class="fa fa-comment"></span> 19</a></div> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="block-21 mb-4 d-flex">
+                        <a class="blog-img me-4" style="background-image: url(images/css.jpg);"></a>
+                        <div class="text">
+                            <h3 class="heading"><a href="blog-css-bases.html">Les bases du CSS</a></h3>
+                            <div class="meta">
+                                <div><a href="#"><span class="fa fa-calendar"></span> 1er août 2021</a></div>
+                                <div><a href="#"><span class="fa fa-user"></span> Nicolas Lépinay</a></div>
+                                <!-- <div><a href="#"><span class="fa fa-comment"></span> 19</a></div> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="block-21 mb-4 d-flex">
+                        <a class="blog-img me-4" style="background-image: url(images/golang.jpg);"></a>
+                        <div class="text">
+                            <h3 class="heading"><a href="blog-go-modules.html">Comment utiliser les modules Go</a></h3>
+                            <div class="meta">
+                                <div><a href="#"><span class="fa fa-calendar"></span> 29 juillet 2021</a></div>
+                                <div><a href="#"><span class="fa fa-user"></span> Nicolas Lépinay</a></div>
+                                <!-- <div><a href="#"><span class="fa fa-comment"></span> 19</a></div> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 
+                    <div class="sidebar-box">
+                        <h3>Tag Cloud</h3>
+                        <div class="tagcloud">
+                            <a href="#" class="tag-cloud-link">work</a>
+                            <a href="#" class="tag-cloud-link">graphic</a>
+                            <a href="#" class="tag-cloud-link">design</a>
+                            <a href="#" class="tag-cloud-link">web</a>
+                            <a href="#" class="tag-cloud-link">apps</a>
+                            <a href="#" class="tag-cloud-link">branding</a>
+                            <a href="#" class="tag-cloud-link">tools</a>
+                            <a href="#" class="tag-cloud-link">HTML</a>
+                            <a href="#" class="tag-cloud-link">CSS3</a>
+                        </div>
+                    </div> -->
+
+                <!-- <div class="sidebar-box">
+                        <h3>Paragraph</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!</p>
+                    </div> -->
+
+            </div>
+
+        </div>
+        </div>
+    </section>
+    <!-- .section -->
+
+    <footer class="ftco-footer">
+        <div class="container-xl">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <p class="mb-0 copyright">Copyright &copy;
+                        <script>
+                            document.write(new Date().getFullYear());
+                        </script> All rights reserved | This template is made with <i class="fa fa-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" rel="nofollow noopener">Colorlib</a></p>
+                </div>
+            </div>
+        </div>
+    </footer> 
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/tiny-slider.js"></script>
+    <script src="js/glightbox.min.js"></script>
+    <script src="js/aos.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+    <script src="js/google-map.js"></script>
+    <script src="js/main.js"></script>
+    <!-- Embedded snippets of code : -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/prism.min.js"></script>
+
+</body>
+
+</html>

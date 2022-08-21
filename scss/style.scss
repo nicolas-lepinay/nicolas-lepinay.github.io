@@ -42,6 +42,7 @@ $o-gradient: -o-linear-gradient(108deg, #b16cea 8%, #ff5e69 40%, #ff8a56 77%, #f
     -ms-background-clip: text;
     -o-background-clip: text;
     background-clip: text;
+    @include transition(.3s);
 }
 
 html {}
@@ -66,6 +67,10 @@ button {
         color: $primary;
         outline: none !important;
     }
+}
+
+a > i {
+    @extend .gradient-text;
 }
 
 h1,
@@ -1297,9 +1302,9 @@ textarea.form-control {
         background: $darken;
         z-index: -1;
         @include transition(.3s);
-        @include media-breakpoint-down(sm) {
-            opacity: .2;
-        }
+        // @include media-breakpoint-down(sm) {
+        //     opacity: .2;
+        // }
     }
     .text {
         max-width: 80%;
@@ -1319,12 +1324,12 @@ textarea.form-control {
             font-size: 12px;
             font-weight: 600;
         }
-        @include media-breakpoint-down(sm) {
-            opacity: 1;
-            span {
-                color: rgba(255, 255, 255, .8);
-            }
-        }
+        // @include media-breakpoint-down(sm) {
+        //     opacity: 1;
+        //     span {
+        //         color: rgba(255, 255, 255, .8);
+        //     }
+        // }
     }
     &:hover,
     &:focus {
@@ -1378,7 +1383,7 @@ textarea.form-control {
             margin-bottom: 0;
             font-weight: 400;
             a {
-                color: lighten($darken, 10%);
+                color: $darken;
                 &:hover,
                 &:focus,
                 &:active {
@@ -1409,6 +1414,7 @@ textarea.form-control {
 }
 
 .blog-single {
+    margin: auto;
     h2 {
         font-size: 40px;
         line-height: 1.2;
@@ -1417,6 +1423,10 @@ textarea.form-control {
     .head-title {
         font-weight: 600;
         font-size: 28px;
+    }
+    img {
+        display: block;
+        margin: auto;
     }
 }
 
