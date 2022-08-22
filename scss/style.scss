@@ -69,7 +69,8 @@ button {
     }
 }
 
-a > i {
+// Les icones FontAwesome, sauf les chevrons droits :
+a > i:not(.fa-chevron-right) {
     @extend .gradient-text;
 }
 

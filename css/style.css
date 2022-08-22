@@ -9592,7 +9592,7 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
-.gradient-text, .dbox p span, .wrapper .social-media p a:hover, .blog-entry .text .theme, .resume-wrap span.position i, .resume-wrap h2, .resume-wrap .h2, .section-counter .number, .testimony-wrap .name, .heading-section.heading-section-white .subheading, .heading-section .subheading, .services .icon span, .hero-wrap .slider-text .subheading, .ftco-navbar-light .navbar-nav > .nav-item > .nav-link.active, a > i {
+.gradient-text, .dbox p span, .wrapper .social-media p a:hover, .blog-entry .text .theme, .resume-wrap span.position i, .resume-wrap h2, .resume-wrap .h2, .section-counter .number, .testimony-wrap .name, .heading-section.heading-section-white .subheading, .heading-section .subheading, .services .icon span, .hero-wrap .slider-text .subheading, .ftco-navbar-light .navbar-nav > .nav-item > .nav-link.active, a > i:not(.fa-chevron-right) {
   background-image: -webkit-linear-gradient(108deg, #b16cea 8%, #ff5e69 40%, #ff8a56 77%, #ffa84b 91%);
   background-image: -moz-linear-gradient(108deg, #b16cea 8%, #ff5e69 40%, #ff8a56 77%, #ffa84b 91%);
   background-image: -ms-linear-gradient(108deg, #b16cea 8%, #ff5e69 40%, #ff8a56 77%, #ffa84b 91%);
@@ -10953,8 +10953,8 @@ textarea.form-control {
   font-size: 28px;
 }
 .blog-single img {
-  margin: auto;
   display: block;
+  margin: auto;
 }
 
 .block-27 ul {
